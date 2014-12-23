@@ -1,0 +1,19 @@
+<configuration scan="true" scanPeriod="5 seconds">
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="org.activiti.osgi" level="INFO" />
+  <logger name="org.apache.felix.fileinstall" level="INFO" />
+  <logger name="org.apache.aries" level="INFO" />
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+
+</configuration>

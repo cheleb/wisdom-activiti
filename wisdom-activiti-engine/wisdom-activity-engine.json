@@ -1,0 +1,21 @@
+{
+    "name": "wisdom-activiti-engine",
+    "version":"1.0.0",
+    "description": "The Wisdom extension exposes the activiti process engine": {
+        "type": "git",
+        "url": "https://github.com/cheleb/wisdom-activiti-engine/"
+    },
+
+    "author": "Olvier NOUGUIER",
+    "license": {
+            "type": "Apache",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0"
+        },
+    "homepage": "https://github.com/cheleb/wisdom-activiti-engine/",
+    "keywords": [
+        "activiti",
+        "bpmn",
+        "process",
+        "task"
+    ]
+}
