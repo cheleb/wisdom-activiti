@@ -12,4 +12,18 @@
    <module>wisdom-activiti</module>
    <module>wisdom-activiti-engine</module>
   </modules>
+
+  <build>
+      <plugins>
+
+          <plugin>
+              <groupId>external.atlassian.jgitflow</groupId>
+              <artifactId>jgitflow-maven-plugin</artifactId>
+              <version>1.0-m3</version>
+          </plugin>
+
+      </plugins>
+
+  </build>
+
 </project>
