@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wisdom-framework</groupId>
   <artifactId>activiti</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Wisdom Activiti extension</name>
   <description>Procide Activiti process engine and administrative UI.
