@@ -50,7 +50,7 @@ public class InContainerIT extends WisdomTest {
         Action.ActionResult result = action(new Invocation() {
             @Override
             public Result invoke() throws Throwable {
-                return controller.welcome();
+                return controller.processes();
             }
         }).header("foo", "bar").invoke();
 
