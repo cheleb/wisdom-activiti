@@ -19,6 +19,10 @@
  */
 package org.wisdom.activiti;
 
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.ProcessDefinition;
+import org.apache.felix.ipojo.annotations.Requires;
+import org.wisdom.activiti.process.ProcessBusiness;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.Controller;
 import org.wisdom.api.annotations.Path;
@@ -28,17 +32,28 @@ import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
 import org.wisdom.api.templates.Template;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Your first Wisdom Controller.
  */
 @Controller
+@Path("/activiti")
 public class ProcessController extends DefaultController {
 
     /**
      * Injects a template named 'welcome'.
      */
-    @View("welcome")
+    @View("processes")
     Template welcome;
+
+
+    /**
+     * Injects activiti repositoryService.
+     */
+    @Requires
+    ProcessBusiness processBusiness;
 
     /**
      * The action method returning the welcome page. It handles
@@ -46,9 +61,11 @@ public class ProcessController extends DefaultController {
      *
      * @return the welcome page
      */
-    @Route(method = HttpMethod.GET, uri = "/activiti")
-    public Result welcome() {
-        return ok(render(welcome, "welcome", "Welcome to Wisdom Activiti!"));
+    @Route(method = HttpMethod.GET, uri = "/processes")
+    public Result processes() {
+        List<String> processes = new ArrayList<String>();
+
+        return ok(render(welcome, "processes", processBusiness.listAll()));
     }
 
 }

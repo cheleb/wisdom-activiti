@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wisdom-framework</groupId>
   <artifactId>activiti</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>Wisdom Activiti extension</name>
   <description>Procide Activiti process engine and administrative UI.
@@ -12,4 +11,18 @@
    <module>wisdom-activiti</module>
    <module>wisdom-activiti-engine</module>
   </modules>
+
+  <build>
+      <plugins>
+
+          <plugin>
+              <groupId>external.atlassian.jgitflow</groupId>
+              <artifactId>jgitflow-maven-plugin</artifactId>
+              <version>1.0-m3</version>
+          </plugin>
+
+      </plugins>
+
+  </build>
+
 </project>

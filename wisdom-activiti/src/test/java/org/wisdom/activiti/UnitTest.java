@@ -19,8 +19,10 @@
  */
 package org.wisdom.activiti;
 
+import org.activiti.engine.RepositoryService;
 import org.junit.Test;
 import org.wisdom.activiti.ProcessController;
+import org.wisdom.activiti.process.ProcessBusiness;
 import org.wisdom.api.http.Result;
 import org.wisdom.api.http.Status;
 import org.wisdom.api.templates.Template;
@@ -47,7 +49,8 @@ public class UnitTest {
         // Use a mock to simulate the template.
         // You can do this for every service and template your controller is using.
         controller.welcome = mock(Template.class);
-        Result result = controller.welcome();
+        controller.processBusiness = mock(ProcessBusiness.class);
+        Result result = controller.processes();
         assertThat(result.getStatusCode()).isEqualTo(Status.OK);
     }
 }

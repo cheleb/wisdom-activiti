@@ -48,5 +48,11 @@
   <service ref="runtimeService" interface="org.activiti.engine.RuntimeService" />
   <service ref="repositoryService" interface="org.activiti.engine.RepositoryService" />
 
+  <bean id="processBusinessImpl" class="org.wisdom.activiti.process.impl.ProcessBusinessImpl">
+      <property name="repositoryService" ref="repositoryService"/>
+  </bean>
+
+  <service ref="processBusinessImpl" interface="org.wisdom.activiti.process.ProcessBusiness" />
+
 </blueprint>
 
