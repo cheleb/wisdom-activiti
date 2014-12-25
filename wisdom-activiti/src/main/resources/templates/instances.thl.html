@@ -46,10 +46,10 @@
     <blockquote class="lead">Wisdom is knowing the right path to take. Integrity is taking it.</blockquote>
 
 
-    <h2 class="text-primary">Processes</h2>
+    <h2 class="text-primary">Instances of </h2>
 
     <ul>
-        <li th:each="process: ${processes}"><a th:href="|/activiti/instances/${process}|" th:text="${process}">key:1:1</a></li>
+        <li th:each="instance: ${instances}"><span th:text="${instance.processDefinitionName}"/>&nbsp;<a th:href="'#'" th:onClick="|cancel('${instance.id}')|">cancel</a></li>
     </ul>
 
     <hr/>
@@ -64,6 +64,16 @@
 <!-- Scripts -->
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/js/bootstrap.min.js"></script>
-
+<script language="JavaScript">
+function cancel(el) {
+   $.ajax({
+    url: '/activiti/instances/' + el,
+    type: 'DELETE',
+    success: function(result) {
+        window.location.reload();
+    }
+});
+}
+</script>
 </body>
 </html>

@@ -239,7 +239,7 @@
                 <version>0.6.5</version>
                 <extensions>true</extensions>
                 <configuration>
-									<disableDistributionPackaging>true</disableDistributionPackaging>
+                    <disableDistributionPackaging>true</disableDistributionPackaging>
                 </configuration>
             </plugin>
 
@@ -266,6 +266,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>run</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>1.2.143</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <repositories>
         <repository>
