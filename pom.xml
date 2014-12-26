@@ -29,6 +29,9 @@
 
       <profile>
           <id>deploy</id>
+          <properties>
+              <felix.fileinstall.dir>${user.home}/works/felix_fileinstall</felix.fileinstall.dir>
+          </properties>
           <build>
               <plugins>
                   <plugin>
@@ -43,7 +46,7 @@
                                   <goal>copy-resources</goal>
                               </goals>
                               <configuration>
-                                  <outputDirectory>/tmp/zozo/</outputDirectory>
+                                  <outputDirectory>${felix.fileinstall.dir}</outputDirectory>
                                   <resources>
                                       <resource>
                                           <directory>target/</directory>

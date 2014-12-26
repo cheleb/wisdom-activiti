@@ -12,6 +12,12 @@ Add configuration in src/main/configuration/system.properties
     jdbc.activiti.username=test
     jdbc.activiti.password=test
 
+Fast deploy in felix.fileinstall.dir:
+
+    mvn clean install -DskipTests -Pdeploy -Dfelix.fileinstall.dir=path/to/felix_fileinstall
+
+
+
 
 
 
