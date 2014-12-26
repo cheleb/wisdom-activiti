@@ -25,6 +25,7 @@ import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.*;
 import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
+import org.wisdom.api.security.Authenticated;
 import org.wisdom.api.templates.Template;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.List;
  */
 @Controller
 @Path("/activiti")
+@Authenticated("Monitor-Authenticator")
 public class InstanceController extends DefaultController {
 
     /**

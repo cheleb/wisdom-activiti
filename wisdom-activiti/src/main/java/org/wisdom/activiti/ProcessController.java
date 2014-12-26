@@ -30,7 +30,9 @@ import org.wisdom.api.annotations.Route;
 import org.wisdom.api.annotations.View;
 import org.wisdom.api.http.HttpMethod;
 import org.wisdom.api.http.Result;
+import org.wisdom.api.security.Authenticated;
 import org.wisdom.api.templates.Template;
+import org.wisdom.monitor.service.MonitorExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,7 @@ import java.util.List;
  */
 @Controller
 @Path("/activiti")
+@Authenticated("Monitor-Authenticator")
 public class ProcessController extends DefaultController {
 
     /**
@@ -65,5 +68,4 @@ public class ProcessController extends DefaultController {
     public Result processes() {
         return ok(render(welcome, "processes", processBusiness.processes()));
     }
-
 }
