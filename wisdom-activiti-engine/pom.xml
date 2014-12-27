@@ -16,10 +16,6 @@
 	<description>Activiti engine exposed with OSGi blueprint</description>
 	<packaging>bundle</packaging>
 
-	<properties>
-		<wisdom.version>0.6.5</wisdom.version>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -63,11 +59,6 @@
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.wisdom-framework</groupId>
-			<artifactId>wisdom-api</artifactId>
-			<version>${wisdom.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.apache.felix</groupId>
@@ -95,12 +86,12 @@
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
-			<version>5.17.0</version>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-osgi</artifactId>
-			<version>5.17.0</version>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
@@ -116,6 +107,11 @@
 			<groupId>org.apache.servicemix.bundles</groupId>
 			<artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
 			<version>1.4_3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.spring-beans</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 

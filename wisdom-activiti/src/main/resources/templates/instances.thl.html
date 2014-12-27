@@ -18,30 +18,16 @@
   #L%
   -->
 <!DOCTYPE html>
-<html>
+<html layout:decorator="layout">
 <head lang="en">
-    <title>Welcome to Wisdom Activiti</title>
-    <link rel="shortcut icon" href="/assets/owl-small.png"/>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Wisdom Activiti</title>
 
-    <link rel="stylesheet" href="/libs/css/bootstrap.css" media="screen"/>
-    <link rel="stylesheet" href="/assets/main.css"/>
-
+    <link rel="stylesheet" href="/assets/table.css"/>
+    <link href="/assets/dashboard.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <ul class="nav nav-pills pull-right">
-            <li><a href="http://wisdom-framework.org">Wisdom Framework</a></li>
-            <li><a href="/documentation">Documentation</a></li>
-            <li><a href="/monitor">Admin</a></li>
-            <li><a href="http://wisdom-framework.org/documentation/apidocs/0.6.5/index.html">API</a></li>
-        </ul>
-        <h3 class="text-danger">${project.artifactId} - ${project.version}</h3>
-    </div>
-
-    <h1 th:text="${welcome}">Welcome!</h1>
+<div layout:fragment="content">
+    <h1 class="page-header"><span th:text="${processIds}">Processes IDs</span></h1>
 
     <blockquote class="lead">Wisdom is knowing the right path to take. Integrity is taking it.</blockquote>
 
@@ -54,26 +40,17 @@
 
     <hr/>
 
-    <div class="footer">
-        <p>&copy; Wisdom Framework Project 2014
-            <span class="text-muted pull-right">Wisdom Framework - 0.6.5</span></p>
-    </div>
-
-</div>
-
-<!-- Scripts -->
-<script src="/libs/jquery.min.js"></script>
-<script src="/libs/js/bootstrap.min.js"></script>
-<script language="JavaScript">
+    <script language="JavaScript">
 function cancel(el) {
    $.ajax({
     url: '/activiti/instances/' + el,
     type: 'DELETE',
     success: function(result) {
         window.location.reload();
-    }
-});
+   }});
 }
 </script>
+</div>
+
 </body>
 </html>

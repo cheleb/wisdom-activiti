@@ -8,8 +8,11 @@ import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Provides;
 import org.apache.felix.ipojo.annotations.Requires;
+import org.springframework.beans.BeanUtils;
 import org.wisdom.activiti.process.ProcessBusiness;
+import org.wisdom.activiti.process.ProcessDefinitionDTO;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class ProcessBusinessImpl implements ProcessBusiness {
     private RuntimeService runtimeService;
 
 
+
     @Override
     public List<String> processes() {
         List<String> processes = new ArrayList<String>();
@@ -36,6 +40,18 @@ public class ProcessBusinessImpl implements ProcessBusiness {
             processes.add(processDefinition.getId());
         }
         return processes;
+    }
+
+    @Override
+    public InputStream getDiagram(String processDefinitionId){
+        return  repositoryService.getProcessDiagram(processDefinitionId);
+    }
+
+    @Override
+    public ProcessDefinition process(String processDefinitionId) {
+        ProcessDefinition processDefinition = new ProcessDefinitionDTO();
+        BeanUtils.copyProperties(repositoryService.getProcessDefinition(processDefinitionId), processDefinition);
+        return processDefinition;
     }
 
     @Override

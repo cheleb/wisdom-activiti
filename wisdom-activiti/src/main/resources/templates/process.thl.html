@@ -27,13 +27,11 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="page-header">Processes</h1>
+    <h1 class="page-header" th:text="${process.name}">Process name</h1>
 
-    <ul>
-        <li th:each="process: ${processes}"><a th:href="|/activiti/process/${process}|" th:text="${process}">key:1:1</a></li>
-    </ul>
+    <img th:src="|/activiti/process/${process.id}/diagram|" />
 
-    <hr/>
+    <h2 class="text-primary"><a th:href="|/activiti/process/${process.id}/instances|">Instances</a></h2>
 
 </div>
 

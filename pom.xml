@@ -7,10 +7,21 @@
   <name>Wisdom Activiti extension</name>
   <description>Procide Activiti process engine and administrative UI.
   </description>
+
+  <properties>
+      <spring.version>4.1.2.RELEASE_1</spring.version>
+      <wisdom.version>0.6.5</wisdom.version>
+      <activiti.version>5.17.1-SNAPSHOT</activiti.version>
+  </properties>
+
   <modules>
    <module>wisdom-activiti</module>
    <module>wisdom-activiti-engine</module>
   </modules>
+
+  <dependencyManagement>
+
+  </dependencyManagement>
 
   <build>
       <plugins>

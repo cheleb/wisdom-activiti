@@ -40,10 +40,10 @@ import java.util.List;
 public class InstanceController extends DefaultController {
 
     /**
-     * Injects a template named 'welcome'.
+     * Injects a template named 'instances'.
      */
     @View("instances")
-    Template welcome;
+    Template instances;
 
 
     /**
@@ -61,21 +61,14 @@ public class InstanceController extends DefaultController {
     @Route(method = HttpMethod.GET, uri = "/instances")
     public Result instances() {
         if (request().accepts("text/html")) {
-            return ok(render(welcome, "instances", processBusiness.instances()));
+            return ok(render(instances, "processIds", "All processes", "instances", processBusiness.instances()));
         } else {
             return ok(processBusiness.instances()).json();
         }
     }
 
 
-    @Route(method = HttpMethod.GET, uri = "/instances/{key}:{deployment}:{id}")
-    public Result instances(@Parameter("key") String key,@Parameter("deployment") String deployment, @Parameter("id") String id) {
-        if (request().accepts("text/html")) {
-            return ok(render(welcome, "instances", processBusiness.instances(key, deployment, id)));
-        } else {
-            return ok(processBusiness.instances(key, deployment, id)).json();
-        }
-    }
+
 
     @Route(method = HttpMethod.DELETE, uri="/instances/{id}")
     public Result delete(@Parameter("id") String id){
