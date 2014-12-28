@@ -44,40 +44,49 @@ import java.util.List;
 public class ProcessController extends DefaultController {
 
     /**
-     * Injects a template named 'processes'.
+     * Injects a template that lists processes.
      */
     @View("processes")
     Template processes;
 
+    /**
+     * Injects a template that shows detail of a process.
+     */
     @View("process")
     Template process;
 
     /**
-     * Injects a template named 'instances'.
+     * Injects a template that lists instances.
      */
     @View("instances")
     Template instances;
 
-
     /**
-     * Injects activiti repositoryService.
+     * Injects activiti service.
      */
     @Requires
     ProcessBusiness processBusiness;
 
     /**
-     * The action method returning the welcome page. It handles
-     * HTTP GET request on the "/" URL.
+     * The action method returning the processes page.
      *
-     * @return the welcome page
+     * @return the processes page
      */
     @Route(method = HttpMethod.GET, uri = "/processes")
     public Result processes() {
         return ok(render(processes, "processes", processBusiness.processes()));
     }
 
+    /**
+     * The action method returning the process detail page.
+     *
+     * @param key of process
+     * @param deployment of process
+     * @param id of process
+     * @return the process page
+     */
     @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}")
-    public Result process(@Parameter("key") String key, @Parameter("deployment") String deployment, @Parameter("id") String id){
+    public Result process(@PathParameter("key") String key, @PathParameter("deployment") String deployment, @PathParameter("id") String id){
         String processDefinitionId = key + ':' + deployment + ':' + id;
 
         ProcessDefinition processDefinition = processBusiness.process(processDefinitionId);
@@ -90,18 +99,41 @@ public class ProcessController extends DefaultController {
 
     }
 
+    /**
+     * The action returns the bpmn diagram for a given process.
+     *
+     * @param key of process
+     * @param deployment of process
+     * @param id of process
+     * @return
+     */
     @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/diagram")
-    public Result diagram(@Parameter("key") String key, @Parameter("deployment") String deployment, @Parameter("id") String id){
+    public Result diagram(@PathParameter("key") String key, @PathParameter("deployment") String deployment, @PathParameter("id") String id){
         String processDefinitionId = key + ':' + deployment + ':' + id;
         return ok(processBusiness.getDiagram(processDefinitionId)).as("image/png");
     }
 
 
+    /**
+     * The action returns instances of a given process.
+     *
+     * @param key of process
+     * @param deployment of process
+     * @param id of process
+     * @return
+     */
     @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/instances")
-    public Result instances(@Parameter("key") String key,@Parameter("deployment") String deployment, @Parameter("id") String id) {
+    public Result instances(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id) {
         if (request().accepts("application/json")) {
             return ok(processBusiness.instances(key, deployment, id)).json();
         }
         return ok(render(instances,"processIds", key+':'+deployment+':'+id, "instances", processBusiness.instances(key, deployment, id)));
+    }
+
+
+    @Route(method = HttpMethod.DELETE, uri="/process/{key}:{deployment}:{id}")
+    public Result delete(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){
+        String processDefinitionId = key + ':' + deployment + ':' + id;
+        return ok(processBusiness.deleteProcess(processDefinitionId));
     }
 }

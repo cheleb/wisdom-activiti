@@ -31,7 +31,20 @@
 
     <img th:src="|/activiti/process/${process.id}/diagram|" />
 
+    <a href="#" th:onClick="|cancel('${process.id}')|">delete</a>
+
     <h2 class="text-primary"><a th:href="|/activiti/process/${process.id}/instances|">Instances</a></h2>
+
+    <script language="JavaScript">
+function cancel(el) {
+   $.ajax({
+    url: '/activiti/process/' + el,
+    type: 'DELETE',
+    success: function(result) {
+        window.location.href = "/activiti/processes";
+   }});
+}
+</script>
 
 </div>
 
