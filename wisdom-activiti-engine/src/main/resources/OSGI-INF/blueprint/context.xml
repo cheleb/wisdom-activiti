@@ -34,6 +34,8 @@
     factory-method="getRuntimeService" />
   <bean id="repositoryService" factory-ref="processEngine"
     factory-method="getRepositoryService" />
+
+  <bean id="taskService" factory-ref="processEngine" factory-method="getTaskService" />
     
   <reference-list id="activityProviders" availability="optional" 
       interface="org.activiti.engine.delegate.JavaDelegate"
@@ -47,7 +49,7 @@
   <service ref="processEngine" interface="org.activiti.engine.ProcessEngine" />
   <service ref="runtimeService" interface="org.activiti.engine.RuntimeService" />
   <service ref="repositoryService" interface="org.activiti.engine.RepositoryService" />
-
+  <service ref="taskService" interface="org.activiti.engine.TaskService" />
 
 </blueprint>
 
