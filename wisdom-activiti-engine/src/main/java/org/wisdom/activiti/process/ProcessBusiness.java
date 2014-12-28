@@ -7,7 +7,10 @@ import java.io.InputStream;
 import java.util.List;
 
 public interface ProcessBusiness {
+
     List<String> processes();
+
+    boolean deleteProcess(String processDefinitionId);
 
     List<ProcessInstance> instances();
 

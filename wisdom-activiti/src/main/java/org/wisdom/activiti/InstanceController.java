@@ -69,7 +69,6 @@ public class InstanceController extends DefaultController {
 
 
 
-
     @Route(method = HttpMethod.DELETE, uri="/instances/{id}")
     public Result delete(@Parameter("id") String id){
         return ok(processBusiness.deleteInstance(id));

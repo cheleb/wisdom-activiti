@@ -48,7 +48,7 @@ public class UnitTest {
         ProcessController controller = new ProcessController();
         // Use a mock to simulate the template.
         // You can do this for every service and template your controller is using.
-        controller.welcome = mock(Template.class);
+        controller.processes = mock(Template.class);
         controller.processBusiness = mock(ProcessBusiness.class);
         Result result = controller.processes();
         assertThat(result.getStatusCode()).isEqualTo(Status.OK);

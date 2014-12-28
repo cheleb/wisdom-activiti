@@ -43,6 +43,13 @@ public class ProcessBusinessImpl implements ProcessBusiness {
     }
 
     @Override
+    public boolean deleteProcess(String processDefinitionId) {
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
+        repositoryService.deleteDeployment(processDefinition.getDeploymentId());
+        return true;
+    }
+
+    @Override
     public InputStream getDiagram(String processDefinitionId){
         return  repositoryService.getProcessDiagram(processDefinitionId);
     }
