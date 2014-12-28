@@ -224,18 +224,7 @@
 
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <!-- Define all the versions of the dependencies provided by Wisdom -->
-                <groupId>org.wisdom-framework</groupId>
-                <artifactId>wisdom-bom</artifactId>
-                <version>0.6.5</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
 
     <build>
         <plugins>
