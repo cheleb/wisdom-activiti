@@ -12,7 +12,7 @@
   <properties>
     <spring.version>4.1.2.RELEASE_1</spring.version>
     <wisdom.version>0.7.0</wisdom.version>
-    <activiti.version>5.17.1-SNAPSHOT</activiti.version>
+    <activiti.version>5.17.0</activiti.version>
   </properties>
 
   <modules>
@@ -52,6 +52,12 @@
       <dependency>
         <groupId>org.activiti</groupId>
         <artifactId>activiti-image-generator</artifactId>
+        <version>${activiti.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.activiti</groupId>
+        <artifactId>activiti-spring</artifactId>
         <version>${activiti.version}</version>
       </dependency>
 
