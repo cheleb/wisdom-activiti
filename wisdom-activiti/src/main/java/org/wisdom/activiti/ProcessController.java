@@ -44,10 +44,10 @@ import java.util.List;
 public class ProcessController extends DefaultController {
 
     /**
-     * Injects a template named 'welcome'.
+     * Injects a template named 'processes'.
      */
     @View("processes")
-    Template welcome;
+    Template processes;
 
     @View("process")
     Template process;
@@ -73,7 +73,7 @@ public class ProcessController extends DefaultController {
      */
     @Route(method = HttpMethod.GET, uri = "/processes")
     public Result processes() {
-        return ok(render(welcome, "processes", processBusiness.processes()));
+        return ok(render(processes, "processes", processBusiness.processes()));
     }
 
     @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}")
