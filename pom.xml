@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wisdom-framework</groupId>
   <artifactId>activiti</artifactId>
@@ -9,71 +10,79 @@
   </description>
 
   <properties>
-      <spring.version>4.1.2.RELEASE_1</spring.version>
-      <wisdom.version>0.6.5</wisdom.version>
-      <activiti.version>5.17.1-SNAPSHOT</activiti.version>
+    <spring.version>4.1.2.RELEASE_1</spring.version>
+    <wisdom.version>0.6.5</wisdom.version>
+    <activiti.version>5.17.1-SNAPSHOT</activiti.version>
   </properties>
 
   <modules>
-   <module>wisdom-activiti</module>
-   <module>wisdom-activiti-engine</module>
+    <module>wisdom-activiti</module>
+    <module>wisdom-activiti-engine</module>
   </modules>
 
   <dependencyManagement>
-
+    <dependencies>
+      <dependency>
+        <!-- Define all the versions of the dependencies provided by Wisdom -->
+        <groupId>org.wisdom-framework</groupId>
+        <artifactId>wisdom-bom</artifactId>
+        <version>${wisdom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
-
   <build>
-      <plugins>
+    <plugins>
 
-          <plugin>
-              <groupId>external.atlassian.jgitflow</groupId>
-              <artifactId>jgitflow-maven-plugin</artifactId>
-              <version>1.0-m3</version>
-          </plugin>
+      <plugin>
+        <groupId>external.atlassian.jgitflow</groupId>
+        <artifactId>jgitflow-maven-plugin</artifactId>
+        <version>1.0-m3</version>
+      </plugin>
 
-      </plugins>
+    </plugins>
 
   </build>
 
   <profiles>
 
-      <profile>
-          <id>deploy</id>
-          <properties>
-              <felix.fileinstall.dir>${user.home}/works/felix_fileinstall</felix.fileinstall.dir>
-          </properties>
-          <build>
-              <plugins>
-                  <plugin>
-                      <artifactId>maven-resources-plugin</artifactId>
-                      <version>2.7</version>
-                      <executions>
-                          <execution>
-                              <id>copy-resources</id>
-                              <!-- here the phase you need -->
-                              <phase>install</phase>
-                              <goals>
-                                  <goal>copy-resources</goal>
-                              </goals>
-                              <configuration>
-                                  <outputDirectory>${felix.fileinstall.dir}</outputDirectory>
-                                  <resources>
-                                      <resource>
-                                          <directory>target/</directory>
-                                          <filtering>false</filtering>
-                                          <includes>
-                                              <include>${project.artifactId}-${project.version}.jar</include>
-                                          </includes>
-                                      </resource>
-                                  </resources>
-                              </configuration>
-                          </execution>
-                      </executions>
-                  </plugin>
-              </plugins>
-          </build>
-      </profile>
+    <profile>
+      <id>deploy</id>
+      <properties>
+        <felix.fileinstall.dir>${user.home}/works/felix_fileinstall</felix.fileinstall.dir>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.7</version>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <!-- here the phase you need -->
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${felix.fileinstall.dir}</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>target/</directory>
+                      <filtering>false</filtering>
+                      <includes>
+                        <include>${project.artifactId}-${project.version}.jar</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 
   </profiles>
 
