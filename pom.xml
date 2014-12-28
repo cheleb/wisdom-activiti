@@ -11,7 +11,7 @@
 
   <properties>
     <spring.version>4.1.2.RELEASE_1</spring.version>
-    <wisdom.version>0.6.5</wisdom.version>
+    <wisdom.version>0.7.0</wisdom.version>
     <activiti.version>5.17.1-SNAPSHOT</activiti.version>
   </properties>
 

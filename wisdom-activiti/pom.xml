@@ -44,7 +44,7 @@
         <dependency>
             <groupId>org.wisdom-framework</groupId>
             <artifactId>wisdom-monitor</artifactId>
-            <version>0.6.5</version>
+            <version>${wisdom.version}</version>
         </dependency>
 
         <dependency>
@@ -231,7 +231,7 @@
             <plugin>
                 <groupId>org.wisdom-framework</groupId>
                 <artifactId>wisdom-maven-plugin</artifactId>
-                <version>0.6.5</version>
+                <version>${wisdom.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <disableDistributionPackaging>true</disableDistributionPackaging>
