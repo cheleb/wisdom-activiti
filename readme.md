@@ -14,7 +14,7 @@ Add configuration in src/main/configuration/system.properties
 
 Fast deploy in felix.fileinstall.dir:
 
-    mvn clean install -DskipTests -Pdeploy -Dfelix.fileinstall.dir=path/to/felix_fileinstall
+    mvn clean install -DskipTests -Dfelix.fileinstall.dir=path/to/felix_fileinstall
 
 
 

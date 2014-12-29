@@ -208,9 +208,11 @@
 
     <profile>
       <id>deploy</id>
-      <properties>
-        <felix.fileinstall.dir>${user.home}/works/felix_fileinstall</felix.fileinstall.dir>
-      </properties>
+      <activation>
+        <property>
+          <name>felix.fileinstall.dir</name>
+        </property>
+      </activation>
       <build>
         <plugins>
           <plugin>

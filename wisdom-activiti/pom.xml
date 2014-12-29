@@ -229,7 +229,7 @@
 
   <profiles>
     <profile>
-      <id>run</id>
+      <id>standalone</id>
       <dependencies>
         <dependency>
           <groupId>com.h2database</groupId>
