@@ -54,6 +54,16 @@
     </dependency>
 
     <dependency>
+      <groupId>org.wisdom-framework</groupId>
+      <artifactId>wisdom-jdbc-datasources</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.apache.felix.ipojo.annotations</artifactId>
     </dependency>
@@ -182,9 +192,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.h2database</groupId>
+      <groupId>org.wisdom-framework</groupId>
       <artifactId>h2</artifactId>
-      <version>1.2.143</version>
+      <version>1.4.184_1-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
 
@@ -232,9 +242,9 @@
       <id>standalone</id>
       <dependencies>
         <dependency>
-          <groupId>com.h2database</groupId>
+          <groupId>org.wisdom-framework</groupId>
           <artifactId>h2</artifactId>
-          <version>1.2.143</version>
+          <version>1.4.184_1-SNAPSHOT</version>
         </dependency>
       </dependencies>
     </profile>

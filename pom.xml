@@ -12,7 +12,7 @@
   <properties>
     <spring.version>4.1.2.RELEASE_1</spring.version>
     <wisdom.version>0.7.0</wisdom.version>
-    <activiti.version>5.17.0</activiti.version>
+    <activiti.version>5.17.1-SNAPSHOT</activiti.version>
   </properties>
 
   <modules>
@@ -59,6 +59,12 @@
         <groupId>org.activiti</groupId>
         <artifactId>activiti-spring</artifactId>
         <version>${activiti.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wisdom-framework</groupId>
+        <artifactId>wisdom-jdbc-datasources</artifactId>
+        <version>0.5-SNAPSHOT</version>
       </dependency>
 
       <dependency>
