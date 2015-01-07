@@ -20,7 +20,9 @@
 package org.wisdom.activiti;
 
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.activiti.process.ProcessBusiness;
 import org.wisdom.api.DefaultController;
@@ -66,6 +68,9 @@ public class ProcessController extends DefaultController {
      */
     @Requires
     ProcessBusiness processBusiness;
+
+    @Requires
+    RuntimeService runtimeService;
 
     /**
      * The action method returning the processes page.
@@ -130,6 +135,15 @@ public class ProcessController extends DefaultController {
         return ok(render(instances,"processIds", key+':'+deployment+':'+id, "instances", processBusiness.instances(key, deployment, id)));
     }
 
+
+    @Route(method = HttpMethod.POST, uri="/process/{key}:{deployment}:{id}")
+    public Result start(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){
+        String processDefinitionId = key + ':' + deployment + ':' + id;
+
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
+
+        return ok(processInstance.getId());
+    }
 
     @Route(method = HttpMethod.DELETE, uri="/process/{key}:{deployment}:{id}")
     public Result delete(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){

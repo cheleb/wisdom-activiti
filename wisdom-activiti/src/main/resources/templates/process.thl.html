@@ -31,11 +31,23 @@
 
     <img th:src="|/activiti/process/${process.id}/diagram|" />
 
-    <a href="#" th:onClick="|cancel('${process.id}')|">delete</a>
+    <ul>
+        <li><a href="#" th:onClick="|cancel('${process.id}')|">delete</a></li>
+        <li><a href="#" th:onClick="|start('${process.id}')|">start</a></li>
+    </ul>
 
     <h2 class="text-primary"><a th:href="|/activiti/process/${process.id}/instances|">Instances</a></h2>
 
     <script language="JavaScript">
+function start(el) {
+   $.ajax({
+    url: '/activiti/process/' + el,
+    type: 'POST',
+    success: function(result) {
+        alert("Started...")
+        window.location.href = "/activiti/process/" + el + "/instances";
+   }});
+}
 function cancel(el) {
    $.ajax({
     url: '/activiti/process/' + el,
@@ -44,6 +56,7 @@ function cancel(el) {
         window.location.href = "/activiti/processes";
    }});
 }
+
 </script>
 
 </div>

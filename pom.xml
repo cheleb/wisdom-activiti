@@ -3,11 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.wisdom-framework</groupId>
   <artifactId>activiti</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Wisdom Activiti extension</name>
-  <description>Procide Activiti process engine and administrative UI.
-  </description>
+
+  <name>Wisdom Activiti extension ${project.version}</name>
+
+  <description>Procide Activiti process engine and administrative UI.</description>
 
   <properties>
     <spring.version>4.1.2.RELEASE_1</spring.version>
@@ -22,6 +23,13 @@
 
   <dependencyManagement>
     <dependencies>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-email</artifactId>
+        <version>1.3.3</version>
+      </dependency>
+
       <dependency>
         <!-- Define all the versions of the dependencies provided by Wisdom -->
         <groupId>org.wisdom-framework</groupId>
@@ -80,15 +88,9 @@
       </dependency>
 
       <dependency>
-        <groupId>org.apache.servicemix.bundles</groupId>
-        <artifactId>org.apache.servicemix.bundles.javax.mail</artifactId>
-        <version>1.4.1_5</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.servicemix.specs</groupId>
-        <artifactId>org.apache.servicemix.specs.activation-api-1.1</artifactId>
-        <version>2.4.0</version>
+        <groupId>org.apache.geronimo.javamail</groupId>
+        <artifactId>geronimo-javamail_1.4_mail</artifactId>
+        <version>1.8.4</version>
       </dependency>
 
       <dependency>
@@ -135,7 +137,11 @@
         <artifactId>org.apache.servicemix.bundles.spring-context</artifactId>
         <version>${spring.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.apache.servicemix.bundles</groupId>
+        <artifactId>org.apache.servicemix.bundles.spring-context-support</artifactId>
+        <version>4.1.2.RELEASE_1</version>
+      </dependency>
       <dependency>
         <groupId>org.apache.servicemix.bundles</groupId>
         <artifactId>org.apache.servicemix.bundles.spring-core</artifactId>
@@ -199,7 +205,16 @@
   </dependencyManagement>
   <build>
     <plugins>
-
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.2</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>external.atlassian.jgitflow</groupId>
         <artifactId>jgitflow-maven-plugin</artifactId>
