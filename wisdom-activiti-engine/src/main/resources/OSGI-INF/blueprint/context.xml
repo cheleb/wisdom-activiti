@@ -3,13 +3,6 @@
 
   <ext:property-placeholder />
 
-  <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.activiti.driver}"/>
-        <property name="url" value="${jdbc.activiti.url}"/>
-        <property name="username" value="${jdbc.activiti.username}"/>
-        <property name="password" value="${jdbc.activiti.password}"/>
-  </bean>-->
-
   <reference id="activiti" interface="javax.sql.DataSource" />
 
   <bean id="configurationFactory" class="org.activiti.osgi.blueprint.ConfigurationFactory">
