@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProcessBusiness {
 
-    List<String> processes();
+    List<ProcessDefinition> processes();
 
     boolean deleteProcess(String processDefinitionId);
 
@@ -20,5 +20,7 @@ public interface ProcessBusiness {
 
     InputStream getDiagram(String processDefinitionId);
 
-    ProcessDefinition process(String processDefinitionId);
+    List<ProcessDefinition> processesByKey(String processDefinitionId);
+
+    ProcessDefinition processById(String processDefinitionId);
 }

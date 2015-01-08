@@ -34,10 +34,10 @@ public class ProcessBusinessImpl implements ProcessBusiness {
 
 
     @Override
-    public List<String> processes() {
-        List<String> processes = new ArrayList<String>();
-        for (ProcessDefinition processDefinition : repositoryService.createProcessDefinitionQuery().list()) {
-            processes.add(processDefinition.getId());
+    public List<ProcessDefinition> processes() {
+        List<ProcessDefinition> processes = new ArrayList<>();
+        for (ProcessDefinition processDefinition : repositoryService.createProcessDefinitionQuery().latestVersion().orderByProcessDefinitionVersion().desc().list()) {
+            processes.add(processDefinition);
         }
         return processes;
     }
@@ -55,11 +55,24 @@ public class ProcessBusinessImpl implements ProcessBusiness {
     }
 
     @Override
-    public ProcessDefinition process(String processDefinitionId) {
+    public List<ProcessDefinition> processesByKey(String key) {
+        List<ProcessDefinition> list = new ArrayList<>();
+        for (ProcessDefinition definition : repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).orderByDeploymentId().asc().list()) {
+            ProcessDefinition processDefinition = new ProcessDefinitionDTO();
+            BeanUtils.copyProperties(definition, processDefinition);
+            list.add(processDefinition);
+        }
+        return list;
+    }
+
+    @Override
+    public ProcessDefinition processById(String processDefinitionId) {
         ProcessDefinition processDefinition = new ProcessDefinitionDTO();
         BeanUtils.copyProperties(repositoryService.getProcessDefinition(processDefinitionId), processDefinition);
         return processDefinition;
     }
+
+
 
     @Override
     public List<ProcessInstance> instances() {

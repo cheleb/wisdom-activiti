@@ -82,6 +82,7 @@ public class ProcessController extends DefaultController {
         return ok(render(processes, "processes", processBusiness.processes()));
     }
 
+
     /**
      * The action method returning the process detail page.
      *
@@ -91,16 +92,16 @@ public class ProcessController extends DefaultController {
      * @return the process page
      */
     @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}")
-    public Result process(@PathParameter("key") String key, @PathParameter("deployment") String deployment, @PathParameter("id") String id){
+    public Result processById(@PathParameter("key") String key, @PathParameter("deployment") String deployment, @PathParameter("id") String id){
         String processDefinitionId = key + ':' + deployment + ':' + id;
 
-        ProcessDefinition processDefinition = processBusiness.process(processDefinitionId);
+        ProcessDefinition processDefinition = processBusiness.processById(processDefinitionId);
 
         if(request().accepts("application/json")){
             return ok(processDefinition).as("application/json");
         }
 
-        return ok(render(process, "process", processDefinition));
+        return ok(render(process, "process", processDefinition, "allversions", processBusiness.processesByKey(key)));
 
     }
 
@@ -148,6 +149,13 @@ public class ProcessController extends DefaultController {
     @Route(method = HttpMethod.DELETE, uri="/process/{key}:{deployment}:{id}")
     public Result delete(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){
         String processDefinitionId = key + ':' + deployment + ':' + id;
-        return ok(processBusiness.deleteProcess(processDefinitionId));
+        if(processBusiness.deleteProcess(processDefinitionId)){
+            List<ProcessDefinition> processDefinitions = processBusiness.processesByKey(key);
+            if(processDefinitions.isEmpty()){
+                return ok("/activiti/processes");
+            }
+            return ok("/activiti/process/" + processDefinitions.get(0).getId());
+        }
+        return internalServerError();
     }
 }
