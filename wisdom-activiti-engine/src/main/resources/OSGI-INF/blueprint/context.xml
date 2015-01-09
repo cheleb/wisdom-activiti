@@ -3,9 +3,9 @@
 
   <ext:property-placeholder />
 
-  <reference id="activiti" interface="javax.sql.DataSource" />
+  <reference id="activiti" interface="javax.sql.DataSource" availability="mandatory" />
 
-  <bean id="configurationFactory" class="org.activiti.osgi.blueprint.ConfigurationFactory">
+  <bean id="configurationFactory" class="org.activiti.osgi.blueprint.ConfigurationFactory" depends-on="activiti">
     <property name="dataSource" ref="activiti" />
     <property name="databaseSchemaUpdate" value="true" />
   </bean>
