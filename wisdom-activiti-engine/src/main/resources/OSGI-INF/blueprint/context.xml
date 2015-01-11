@@ -46,5 +46,15 @@
   <service ref="repositoryService" interface="org.activiti.engine.RepositoryService" />
   <service ref="taskService" interface="org.activiti.engine.TaskService" />
 
+  <bean id="processes" class="org.wisdom.activiti.process.impl.ProcessesImpl">
+    <property name="repositoryService" ref="repositoryService" />
+    <property name="runtimeService" ref="runtimeService" />
+    <property name="taskService" ref="taskService" />
+  </bean>
+
+  <service ref="processes" interface="org.wisdom.activiti.process.Processes" />
+
+
+
 </blueprint>
 
