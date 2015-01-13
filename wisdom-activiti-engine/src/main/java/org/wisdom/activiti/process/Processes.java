@@ -21,6 +21,8 @@ public interface Processes {
 
     Instance findInstancesById(String instanceId);
 
+    List<Task> findByTaskKeyAndField(String key, Map<String, String> predicate, String... vars);
+
     List<Task> findAllTasksByInstanceKey(String s, String ... vars);
 
     void completeTask(String taskId, Map<String, Object> params);

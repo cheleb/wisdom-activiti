@@ -6,6 +6,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
 import org.wisdom.activiti.process.*;
 import org.wisdom.activiti.process.Process;
 
@@ -77,13 +78,22 @@ public class ProcessesImpl implements Processes {
 
         return buildtInstance(processInstance);
     }
-
     @Override
-    public List<org.wisdom.activiti.process.Task> findAllTasksByInstanceKey(String key, String ... vars) {
-        List<org.wisdom.activiti.process.Task> list = new ArrayList<>();
+    public List<org.wisdom.activiti.process.Task> findByTaskKeyAndField(String key, Map<String,String> predicate ,String ... vars){
 
-        for (Task t : taskService.createTaskQuery().processDefinitionKey(key).list()) {
-        org.wisdom.activiti.process.Task task = new org.wisdom.activiti.process.Task();
+
+        TaskQuery taskQuery = taskService.createTaskQuery().taskDefinitionKey(key);
+        for (Map.Entry<String,String> entry : predicate.entrySet()){
+            taskQuery = taskQuery.processVariableValueEquals(entry.getKey(), entry.getValue());
+        }
+        return getTasksWithVariables(taskQuery, vars);
+
+    }
+
+    private List<org.wisdom.activiti.process.Task> getTasksWithVariables(TaskQuery taskQuery, String[] vars) {
+        List<org.wisdom.activiti.process.Task> list = new ArrayList<>();
+        for (Task t : taskQuery.list()) {
+            org.wisdom.activiti.process.Task task = new org.wisdom.activiti.process.Task();
             task.setId(t.getId());
             task.setName(t.getName());
             task.setKey(t.getTaskDefinitionKey());
@@ -98,13 +108,16 @@ public class ProcessesImpl implements Processes {
                     variables.put(vars[i], val);
                 }
             }
-
             task.setVars(variables);
             list.add(task);
         }
-
-
         return list;
+    }
+
+    @Override
+    public List<org.wisdom.activiti.process.Task> findAllTasksByInstanceKey(String key, String ... vars) {
+        return getTasksWithVariables(taskService.createTaskQuery().processDefinitionKey(key), vars);
+
     }
 
     @Override
