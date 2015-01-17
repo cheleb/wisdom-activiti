@@ -27,15 +27,16 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="page-header"><span th:text="${processIds}">Processes IDs</span></h1>
-
-    <blockquote class="lead">Wisdom is knowing the right path to take. Integrity is taking it.</blockquote>
 
 
-    <h2 class="text-primary">Instances of </h2>
+    <h2 class="text-primary">Running instances of <span th:text="${processName}">ProcessName</span> (Id : <span th:text="${processId}">ProcessID</span>)</h2>
 
     <ul>
-        <li th:each="instance: ${instances}"><span th:text="${instance.processDefinitionName}"/>&nbsp;<a th:href="'#'" th:onClick="|cancel('${instance.id}')|">cancel</a></li>
+        <li th:each="instance: ${instances}">
+            <span th:text='${instance.id}'/>&nbsp;( businessKey :  <span th:text='${instance.businessKey}'/> ) &nbsp;
+            <a class="btn btn-danger" th:href="'#'" th:onClick="|cancel('${instance.id}')|">delete instance</a>&nbsp;
+            <a class="btn btn-info" th:href="|/activiti/instance/${instance.id}|">view details</a>
+        </li>
     </ul>
 
     <hr/>
@@ -43,7 +44,7 @@
     <script language="JavaScript">
 function cancel(el) {
    $.ajax({
-    url: '/activiti/instances/' + el,
+    url: '/activiti/instance/' + el,
     type: 'DELETE',
     success: function(result) {
         window.location.reload();
