@@ -35,11 +35,11 @@
                 <img th:src="|/activiti/process/${process.id}/diagram|" />
             </div>
             <div class="col-xs-6 col-md-4">
-                <ul>
-                    <li><a href="#" th:onClick="|deleteProcess('${process.id}')|">delete</a></li>
-                    <li><a href="#" th:onClick="|start('${process.id}')|">start</a></li>
-                </ul>
-                <h2 class="text-primary"><a th:href="|/activiti/process/${process.id}/instances|">Instances</a></h2>
+                <div class="row">
+                    <a class="btn btn-info" th:href="|/activiti/process/${process.id}/instance/|">list instance</a>&nbsp;
+                    <a class="btn btn-success" href="#" th:onClick="|start('${process.id}')|">start process</a>&nbsp;
+                    <a class="btn btn-danger" href="#" th:onClick="|deleteProcess('${process.id}')|">delete process</a>
+                </div>
             </div>
         </div>
     </div>

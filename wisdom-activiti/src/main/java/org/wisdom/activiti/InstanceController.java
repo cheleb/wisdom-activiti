@@ -19,6 +19,8 @@
  */
 package org.wisdom.activiti;
 
+import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.activiti.process.ProcessBusiness;
 import org.wisdom.api.DefaultController;
@@ -29,7 +31,9 @@ import org.wisdom.api.security.Authenticated;
 import org.wisdom.api.templates.Template;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Your first Wisdom Controller.
@@ -44,6 +48,12 @@ public class InstanceController extends DefaultController {
      */
     @View("instances")
     Template instances;
+
+    /**
+     * Injects a template that detail instance.
+     */
+    @View("instance")
+    Template instance;
 
 
     /**
@@ -69,8 +79,30 @@ public class InstanceController extends DefaultController {
 
 
 
-    @Route(method = HttpMethod.DELETE, uri="/instances/{id}")
+    @Route(method = HttpMethod.DELETE, uri="/instance/{id}")
     public Result delete(@Parameter("id") String id){
         return ok(processBusiness.deleteInstance(id));
+    }
+
+    /**
+     * The action returns details of a given instance process id.
+     *
+     * @param id of instance process
+     * @return
+     */
+    @Route(method = HttpMethod.GET, uri = "/instance/{id}")
+    public Result instance( @PathParameter("id") String id) {
+        if (request().accepts("application/json")) {
+            //return ok(processBusiness.instances(processKey, processDeployment, processId)).json();
+        }
+        final ProcessInstance processInstance = processBusiness.instanceById(id);
+        final Map<String, Object> processVariables = processBusiness.getInstanceVariables(processInstance.getProcessInstanceId());
+        final Task task = processBusiness.getcurrentTask(processInstance.getProcessInstanceId());
+        Map<String,Object> mapDisplay = new HashMap<>();
+        mapDisplay.put("instanceId", id);
+        mapDisplay.put("processInstance",processInstance);
+        mapDisplay.put("processVariables", processVariables);
+        mapDisplay.put("currentTaskName", task.getName());
+        return ok(render(instance,mapDisplay));
     }
 }

@@ -2,8 +2,10 @@ package org.wisdom.activiti.process.impl;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Provides;
@@ -15,6 +17,7 @@ import org.wisdom.activiti.process.ProcessDefinitionDTO;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cheleb on 24/12/14.
@@ -30,6 +33,9 @@ public class ProcessBusinessImpl implements ProcessBusiness {
 
     @Requires
     private RuntimeService runtimeService;
+
+    @Requires
+    private TaskService taskService;
 
 
 
@@ -103,8 +109,25 @@ public class ProcessBusinessImpl implements ProcessBusiness {
     }
 
     @Override
+    public ProcessInstance instanceById(String id){
+        final ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(id).singleResult();
+        return processInstance;
+    }
+
+    @Override
     public boolean deleteInstance(String id) {
         runtimeService.deleteProcessInstance(id, "admin caneelation");
         return true;
+    }
+
+    @Override
+    public Map<String, Object> getInstanceVariables(String processInstanceId){
+        final Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+        return  runtimeService.getVariables(task.getExecutionId());
+    }
+
+    @Override
+    public Task getcurrentTask(String processInstanceId){
+        return taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
     }
 }

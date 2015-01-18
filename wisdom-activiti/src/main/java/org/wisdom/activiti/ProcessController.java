@@ -35,7 +35,9 @@ import org.wisdom.monitor.service.MonitorExtension;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Your first Wisdom Controller.
@@ -128,12 +130,12 @@ public class ProcessController extends DefaultController {
      * @param id of process
      * @return
      */
-    @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/instances")
+    @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/instance/")
     public Result instances(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id) {
         if (request().accepts("application/json")) {
             return ok(processBusiness.instances(key, deployment, id)).json();
         }
-        return ok(render(instances,"processIds", key+':'+deployment+':'+id, "instances", processBusiness.instances(key, deployment, id)));
+        return ok(render(instances,"processName", key, "processId", id, "instances", processBusiness.instances(key, deployment, id)));
     }
 
 
@@ -158,4 +160,6 @@ public class ProcessController extends DefaultController {
         }
         return internalServerError();
     }
+
+
 }
