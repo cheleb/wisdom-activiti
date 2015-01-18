@@ -19,8 +19,11 @@
  */
 package org.wisdom.activiti;
 
+import org.apache.felix.ipojo.annotations.Requires;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.wisdom.test.http.HttpResponse;
 import org.wisdom.test.parents.WisdomBlackBoxTest;
 
@@ -31,9 +34,22 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class BlackBoxIT extends WisdomBlackBoxTest {
 
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlackBoxIT.class);
+
     @Test
     public void testThatTheWelcomePageIsServed() throws Exception {
+
+
+
         HttpResponse<Document> page = get("/activiti/processes").asHtml();
+
+        if(page.body().title().equals("Wisdom - Route not found")){
+            Thread.sleep(2000);
+            LOGGER.info("Hum this IT starts to soon...");
+            page = get("/activiti/processes").asHtml();
+        }
+
         assertThat(page.body().title()).isEqualTo("Wisdom - Monitoring");
         //assertThat(page.body().getElementsByClass("footer").text()).contains("Wisdom");
     }
