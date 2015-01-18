@@ -45,6 +45,12 @@
         <version>${wisdom.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.wisdom-framework</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.4.184_1</version>
+      </dependency>
+
       <!-- Activiti -->
 
       <dependency>
