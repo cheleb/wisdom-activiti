@@ -17,9 +17,10 @@
  * limitations under the License.
  * #L%
  */
-package org.wisdom.activiti;
+package org.wisdom.activiti.it;
 
 import org.junit.Test;
+import org.wisdom.activiti.ProcessController;
 import org.wisdom.api.http.Result;
 import org.wisdom.test.parents.Action;
 import org.wisdom.test.parents.Invocation;

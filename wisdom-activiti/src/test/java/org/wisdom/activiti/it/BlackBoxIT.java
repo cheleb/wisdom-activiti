@@ -17,9 +17,8 @@
  * limitations under the License.
  * #L%
  */
-package org.wisdom.activiti;
+package org.wisdom.activiti.it;
 
-import org.apache.felix.ipojo.annotations.Requires;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.slf4j.Logger;
