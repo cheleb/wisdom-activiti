@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>activiti</artifactId>
+        <groupId>org.wisdom-framework</groupId>
+        <version>1.0.3-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.wisdom-framework.activiti</groupId>
+    <artifactId>wisdom-activiti-patch</artifactId>
+
+    <name>Wisdom Activiti Patch</name>
+    <description>A fragment host that exports "org.activiti.icons" from "org.activiti.image" OSGi bundle.</description>
+
+    <packaging>bundle</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>2.5.3</version>
+            <extensions>true</extensions>
+            <configuration>
+                <instructions>
+                    <Fragment-Host>org.activiti.image</Fragment-Host>
+                    <Export-Package>org.activiti.icons</Export-Package>
+                </instructions>
+            </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

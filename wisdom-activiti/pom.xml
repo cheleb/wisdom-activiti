@@ -32,7 +32,7 @@
     <groupId>org.wisdom-framework.activiti</groupId>
     <artifactId>wisdom-activiti</artifactId>
 
-    <name>Wisdom Activiti (UI) ${project.version}</name>
+    <name>Wisdom Activiti (UI)</name>
 
     <packaging>wisdom</packaging>
 
