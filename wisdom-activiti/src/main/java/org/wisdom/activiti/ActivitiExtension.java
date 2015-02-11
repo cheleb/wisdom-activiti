@@ -20,7 +20,7 @@ public class ActivitiExtension extends DefaultController implements MonitorExten
 
     @Override
     public String url() {
-        return "/activiti/processes";
+        return "/monitor/activiti/processes";
     }
 
     @Override

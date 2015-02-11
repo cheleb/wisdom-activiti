@@ -43,7 +43,7 @@ import java.util.Map;
  * Your first Wisdom Controller.
  */
 @Controller
-@Path("/activiti")
+@Path("/monitor/activiti")
 @Authenticated("Monitor-Authenticator")
 public class ProcessController extends DefaultController {
 

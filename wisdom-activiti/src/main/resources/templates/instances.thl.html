@@ -35,7 +35,7 @@
         <li th:each="instance: ${instances}">
             <span th:text='${instance.id}'/>&nbsp;( businessKey :  <span th:text='${instance.businessKey}'/> ) &nbsp;
             <a class="btn btn-danger" th:href="'#'" th:onClick="|cancel('${instance.id}')|">delete instance</a>&nbsp;
-            <a class="btn btn-info" th:href="|/activiti/instance/${instance.id}|">view details</a>
+            <a class="btn btn-info" th:href="|/monitor/activiti/instance/${instance.id}|">view details</a>
         </li>
     </ul>
 
@@ -44,7 +44,7 @@
     <script language="JavaScript">
 function cancel(el) {
    $.ajax({
-    url: '/activiti/instance/' + el,
+    url: '/monitor/activiti/instance/' + el,
     type: 'DELETE',
     success: function(result) {
         window.location.reload();

@@ -32,11 +32,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-8">
-                <img th:src="|/activiti/process/${process.id}/diagram|" />
+                <img th:src="|/monitor/activiti/process/${process.id}/diagram|" />
             </div>
             <div class="col-xs-6 col-md-4">
                 <div class="row">
-                    <a class="btn btn-info" th:href="|/activiti/process/${process.id}/instance/|">list instance</a>&nbsp;
+                    <a class="btn btn-info" th:href="|/monitor/activiti/process/${process.id}/instance/|">list instance</a>&nbsp;
                     <a class="btn btn-success" href="#" th:onClick="|start('${process.id}')|">start process</a>&nbsp;
                     <a class="btn btn-danger" href="#" th:onClick="|deleteProcess('${process.id}')|">delete process</a>
                 </div>
@@ -52,15 +52,15 @@
     <script language="JavaScript">
 function start(el) {
    $.ajax({
-    url: '/activiti/process/' + el,
+    url: '/monitor/activiti/process/' + el,
     type: 'POST',
     success: function(result) {
-        window.location.href = "/activiti/process/" + el + "/instances";
+        window.location.href = "/monitor/activiti/process/" + el + "/instances";
    }});
 }
 function deleteProcess(el) {
    $.ajax({
-    url: '/activiti/process/' + el,
+    url: '/monitor/activiti/process/' + el,
     type: 'DELETE',
     success: function(result) {
       window.location.href = result;

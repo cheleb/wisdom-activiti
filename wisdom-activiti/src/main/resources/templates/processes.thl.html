@@ -30,7 +30,7 @@
     <h1 class="page-header">Processes</h1>
 
     <ul>
-        <li th:each="process: ${processes}"><a th:href="|/activiti/process/${process.id}|" th:text="${process.name}">key:1:1</a></li>
+        <li th:each="process: ${processes}"><a th:href="|/monitor/activiti/process/${process.id}|" th:text="${process.name}">key:1:1</a></li>
     </ul>
 
     <hr/>

@@ -34,7 +34,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-lg-6">
-                <img style="width: 100%" th:src="|/activiti/process/${processInstance.processDefinitionId}/diagram|" />
+                <img style="width: 100%" th:src="|/monitor/activiti/process/${processInstance.processDefinitionId}/diagram|" />
             </div>
             <div class="col-md-12 col-lg-6">
                 <div class="row">
@@ -68,12 +68,12 @@
                 url: '/activiti/instance/' + el,
                 type: 'DELETE',
                 success: function(result) {
-                    window.location.href = '/activiti/process/'+parent+'/instance/';
+                    window.location.href = '/monitor/activiti/process/'+parent+'/instance/';
                 }});
         }
 
         function backToInstanceList(parent){
-            window.location.href = '/activiti/process/'+parent+'/instance/';
+            window.location.href = '/monitor/activiti/process/'+parent+'/instance/';
         }
     </script>
 </div>
