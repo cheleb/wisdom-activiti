@@ -2,7 +2,7 @@ package org.wisdom.activiti.process;
 
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
+
 
 import java.io.InputStream;
 import java.util.List;
@@ -28,7 +28,5 @@ public interface ProcessBusiness {
 
     ProcessDefinition processById(String processDefinitionId);
 
-    Map<String, Object> getInstanceVariables(String taskId);
-
-    List<Task> getcurrentTasks(String processInstanceId);
+    List<Task> getCurrentTasks(String processInstanceId);
 }

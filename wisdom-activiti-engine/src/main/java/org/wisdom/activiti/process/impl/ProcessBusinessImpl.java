@@ -120,14 +120,22 @@ public class ProcessBusinessImpl implements ProcessBusiness {
         return true;
     }
 
-    @Override
-    public Map<String, Object> getInstanceVariables(String processInstanceId){
-        final Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
-        return  runtimeService.getVariables(task.getExecutionId());
-    }
 
     @Override
-    public Task getcurrentTask(String processInstanceId){
-        return taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+    public List<org.wisdom.activiti.process.Task> getCurrentTasks(String processInstanceId){
+        List<org.wisdom.activiti.process.Task> res = new ArrayList<>();
+        final List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).list();
+        for (Task task: tasks){
+            org.wisdom.activiti.process.Task t = new org.wisdom.activiti.process.Task();
+            t.setDescription(task.getDescription());
+            t.setId(task.getId());
+            t.setKey(task.getTaskDefinitionKey());
+            t.setName(task.getName());
+            t.setInstanceId(task.getProcessInstanceId());
+            Map<String, Object> vars = runtimeService.getVariables(task.getExecutionId());
+            t.setVars(vars);
+            res.add(t);
+        }
+        return res ;
     }
 }

@@ -20,9 +20,9 @@
 package org.wisdom.activiti;
 
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.wisdom.activiti.process.ProcessBusiness;
+import org.wisdom.activiti.process.Task;
 import org.wisdom.api.DefaultController;
 import org.wisdom.api.annotations.*;
 import org.wisdom.api.http.HttpMethod;
@@ -96,13 +96,11 @@ public class InstanceController extends DefaultController {
             //return ok(processBusiness.instances(processKey, processDeployment, processId)).json();
         }
         final ProcessInstance processInstance = processBusiness.instanceById(id);
-        final Map<String, Object> processVariables = processBusiness.getInstanceVariables(processInstance.getProcessInstanceId());
-        final Task task = processBusiness.getcurrentTask(processInstance.getProcessInstanceId());
+        final List<Task> tasks = processBusiness.getCurrentTasks(processInstance.getProcessInstanceId());
         Map<String,Object> mapDisplay = new HashMap<>();
         mapDisplay.put("instanceId", id);
         mapDisplay.put("processInstance",processInstance);
-        mapDisplay.put("processVariables", processVariables);
-        mapDisplay.put("currentTaskName", task.getName());
+        mapDisplay.put("tasks", tasks);
         return ok(render(instance,mapDisplay));
     }
 }

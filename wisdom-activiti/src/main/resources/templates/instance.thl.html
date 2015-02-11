@@ -42,7 +42,10 @@
                     <a class="btn btn-info" th:href="'#'" th:onClick="|backToInstanceList('${processInstance.processDefinitionId}')|">back to list</a>
                 </div>
                 <div class="row">
-                    <h4 class="text-primary">current task is : <span class="text-info" th:text="${currentTaskName}"/></h4>
+                    <h4 class="text-primary">current tasks are : </h4>
+                    <ul th:each="task : ${tasks}">
+                        <li class="text-info" th:text="${task.name}">User Task</li>
+                    </ul>
                 </div>
                 <div class="row">
                     <table class="table table-striped" >
