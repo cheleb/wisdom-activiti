@@ -21,6 +21,7 @@
     <module>wisdom-activiti</module>
     <module>wisdom-activiti-engine</module>
     <module>wisdom-activiti-patch</module>
+    <module>wisdom-activiti-sample</module>
   </modules>
 
   <dependencyManagement>
