@@ -24,12 +24,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.wisdom-framework.activiti</groupId>
-            <artifactId>wisdom-activiti-patch</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.wisdom-framework</groupId>
             <artifactId>h2</artifactId>
         </dependency>
