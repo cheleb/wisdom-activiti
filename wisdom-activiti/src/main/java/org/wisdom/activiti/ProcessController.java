@@ -130,7 +130,7 @@ public class ProcessController extends DefaultController {
      * @param id of process
      * @return
      */
-    @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/instance/")
+    @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/instances")
     public Result instances(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id) {
         if (request().accepts("application/json")) {
             return ok(processBusiness.instances(key, deployment, id)).json();
