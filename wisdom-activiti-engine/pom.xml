@@ -64,11 +64,13 @@
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-image-generator</artifactId>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>org.wisdom-framework.activiti</groupId>
 			<artifactId>wisdom-activiti-patch</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-osgi</artifactId>
