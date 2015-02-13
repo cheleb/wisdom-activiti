@@ -12,15 +12,13 @@ Add configuration in src/main/configuration/system.properties
     jdbc.activiti.username=test
     jdbc.activiti.password=test
 
-Deploy:
+install:
 
-	mvn clean deploy -Pstandalone
+	mvn clean install
 
 Fast deploy in felix.fileinstall.dir:
 
-    mvn clean install -Pstandalone -DskipTests -Dfelix.fileinstall.dir=path/to/felix_fileinstall
-    
--Pstandalone just add H2 dependencies for IT test.
+    mvn clean install -DskipTests -Dfelix.fileinstall.dir=path/to/felix_fileinstall
 
 
 
