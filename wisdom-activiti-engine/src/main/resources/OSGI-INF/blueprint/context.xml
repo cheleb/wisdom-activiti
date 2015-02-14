@@ -2,56 +2,60 @@
            xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
 
 
-    <reference id="activitiDataSource" interface="javax.sql.DataSource" availability="mandatory" filter="|(datasource.name=activiti)(activiti=true)" />
+  <reference id="activitiDataSource" interface="javax.sql.DataSource" availability="mandatory"
+             filter="|(datasource.name=activiti)(activiti=true)"/>
 
-    <bean id="configurationFactory" class="org.activiti.osgi.blueprint.ConfigurationFactory" depends-on="activitiDataSource">
-        <property name="dataSource"  ref="activitiDataSource"/>
-        <property name="databaseSchemaUpdate" value="true"/>
-    </bean>
+  <bean id="configurationFactory" class="org.activiti.osgi.blueprint.ConfigurationFactory"
+        depends-on="activitiDataSource">
+    <property name="dataSource" ref="activitiDataSource"/>
+    <property name="databaseSchemaUpdate" value="true"/>
+  </bean>
 
-    <bean id="configuration" factory-ref="configurationFactory" factory-method="getConfiguration"/>
+  <bean id="configuration" factory-ref="configurationFactory" factory-method="getConfiguration"/>
 
-    <bean id="processEngineFactory"
-          class="org.activiti.osgi.blueprint.ProcessEngineFactoryWithELResolver"
-          init-method="init"
-          destroy-method="destroy">
+  <bean id="processEngineFactory"
+        class="org.activiti.osgi.blueprint.ProcessEngineFactoryWithELResolver"
+        init-method="init"
+        destroy-method="destroy">
 
-        <property name="processEngineConfiguration" ref="configuration"/>
-        <property name="bundle" ref="blueprintBundle"/>
-        <property name="blueprintELResolver" ref="blueprintELResolver"/>
-    </bean>
+    <property name="processEngineConfiguration" ref="configuration"/>
+    <property name="bundle" ref="blueprintBundle"/>
+    <property name="blueprintELResolver" ref="blueprintELResolver"/>
+  </bean>
 
-    <bean id="processEngine" factory-ref="processEngineFactory"
-          factory-method="getObject"/>
+  <bean id="processEngine" factory-ref="processEngineFactory"
+        factory-method="getObject"/>
+  <bean id="runtimeService" factory-ref="processEngine"
+        factory-method="getRuntimeService"/>
+  <bean id="repositoryService" factory-ref="processEngine"
+        factory-method="getRepositoryService"/>
+  <bean id="taskService" factory-ref="processEngine"
+        factory-method="getTaskService"/>
+  <bean id="formService" factory-ref="processEngine"
+        factory-method="getFormService"/>
 
-    <bean id="runtimeService" factory-ref="processEngine"
-          factory-method="getRuntimeService"/>
-    <bean id="repositoryService" factory-ref="processEngine"
-          factory-method="getRepositoryService"/>
+  <reference-list id="activityProviders" availability="optional"
+                  interface="org.activiti.engine.delegate.JavaDelegate"
+                  activation="eager">
 
-    <bean id="taskService" factory-ref="processEngine" factory-method="getTaskService"/>
+    <reference-listener ref="blueprintELResolver" bind-method="bindService" unbind-method="unbindService"/>
+  </reference-list>
 
-    <reference-list id="activityProviders" availability="optional"
-                    interface="org.activiti.engine.delegate.JavaDelegate"
-                    activation="eager">
+  <bean id="blueprintELResolver" class="org.activiti.osgi.blueprint.BlueprintELResolver"/>
 
-        <reference-listener ref="blueprintELResolver" bind-method="bindService" unbind-method="unbindService"/>
-    </reference-list>
+  <service ref="processEngine" interface="org.activiti.engine.ProcessEngine"/>
+  <service ref="runtimeService" interface="org.activiti.engine.RuntimeService"/>
+  <service ref="repositoryService" interface="org.activiti.engine.RepositoryService"/>
+  <service ref="taskService" interface="org.activiti.engine.TaskService"/>
+  <service ref="formService" interface="org.activiti.engine.FormService"/>
 
-    <bean id="blueprintELResolver" class="org.activiti.osgi.blueprint.BlueprintELResolver"/>
+  <bean id="processes" class="org.wisdom.activiti.process.impl.ProcessesImpl">
+    <property name="repositoryService" ref="repositoryService"/>
+    <property name="runtimeService" ref="runtimeService"/>
+    <property name="taskService" ref="taskService"/>
+  </bean>
 
-    <service ref="processEngine" interface="org.activiti.engine.ProcessEngine"/>
-    <service ref="runtimeService" interface="org.activiti.engine.RuntimeService"/>
-    <service ref="repositoryService" interface="org.activiti.engine.RepositoryService"/>
-    <service ref="taskService" interface="org.activiti.engine.TaskService"/>
-
-    <bean id="processes" class="org.wisdom.activiti.process.impl.ProcessesImpl">
-        <property name="repositoryService" ref="repositoryService"/>
-        <property name="runtimeService" ref="runtimeService"/>
-        <property name="taskService" ref="taskService"/>
-    </bean>
-
-    <service ref="processes" interface="org.wisdom.activiti.process.Processes"/>
+  <service ref="processes" interface="org.wisdom.activiti.process.Processes"/>
 
 
 </blueprint>
