@@ -12,12 +12,15 @@ import org.wisdom.api.annotations.Path;
 import org.wisdom.api.annotations.PathParameter;
 import org.wisdom.api.annotations.Route;
 import org.wisdom.api.http.HttpMethod;
+import org.wisdom.api.http.MimeTypes;
 import org.wisdom.api.http.Result;
 import org.wisdom.api.security.Authenticated;
 
+import javax.activation.MimeType;
+
 
 @Controller
-@Path("/monitor/activiti")
+@Path("/activiti")
 @Authenticated("Monitor-Authenticator")
 public class FormController extends DefaultController {
 
@@ -25,9 +28,12 @@ public class FormController extends DefaultController {
     @Requires
     private Forms forms;
 
-    @Route(method = HttpMethod.GET, uri = "/form/{key}:{deployment}:{id}")
-    public Result formProperties(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){
+    @Route(method = HttpMethod.GET, uri = "/process/{key}:{deployment}:{id}/startform")
+    public Result startform(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){
         String processDefinitionId = key + ':' + deployment + ':' + id;
+        if(request().accepts(MimeTypes.JSON)){
+            return json().render(forms.fields(processDefinitionId));
+        }
         return ok(forms.fields(processDefinitionId));
     }
 

@@ -34,10 +34,7 @@ import org.wisdom.api.templates.Template;
 import org.wisdom.monitor.service.MonitorExtension;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Your first Wisdom Controller.
@@ -143,7 +140,23 @@ public class ProcessController extends DefaultController {
     public Result start(@PathParameter("key") String key,@PathParameter("deployment") String deployment, @PathParameter("id") String id){
         String processDefinitionId = key + ':' + deployment + ':' + id;
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
+        Map<String, List<String>> parameters = request().parameters();
+
+        ProcessInstance processInstance;
+
+        if(parameters != null && !parameters.isEmpty()){
+            Map<String, Object> processVariables = new HashMap<>();
+            for(Map.Entry<String, List<String>> e: parameters.entrySet()){
+                if(!e.getValue().isEmpty()){
+                    processVariables.put(e.getKey(), e.getValue().get(0));
+                }
+            }
+            processInstance = runtimeService.startProcessInstanceById(processDefinitionId, processVariables);
+        }else{
+
+            processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
+        }
+
 
         return ok(processInstance.getId());
     }

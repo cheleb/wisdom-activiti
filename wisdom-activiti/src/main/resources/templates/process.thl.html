@@ -36,7 +36,7 @@
             </div>
             <div class="col-xs-6 col-md-4">
                 <div class="row">
-                    <a class="btn btn-info" th:href="|/monitor/activiti/process/${process.id}/instance/|">list instance</a>&nbsp;
+                    <a class="btn btn-info" th:href="|/monitor/activiti/process/${process.id}/instances|">list instance</a>&nbsp;
                     <a class="btn btn-success" href="#" th:onClick="|start('${process.id}')|">start process</a>&nbsp;
                     <a class="btn btn-danger" href="#" th:onClick="|deleteProcess('${process.id}')|">delete process</a>
                 </div>
@@ -44,19 +44,65 @@
         </div>
     </div>
 
+    <div class="modal fade" id="start-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Start process instance</h4>
+                </div>
+                <div class="modal-body" id="startform">
+                    <!-- filled -->
+                </div>
+                <div class="modal-footer">
+                    <button id="start" type="button" class="btn btn-default">Start process</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-
-
+    <script src="/libs/sprintf.min.js"></script>
 
     <script language="JavaScript">
+function createStartForm(pdid, divform){
+   var zeform = $(sprintf('<form id="startform" action="/monitor/activiti/process/%s" method="POST"/>', pdid));
+    $.ajax({
+    url: '/activiti/process/' + pdid + "/startform",
+    type: 'GET',
+    success: function(props) {
+        for(i in props){
+           var p = props[i];
+           zeform.append("<span>" + p.name + "</span>");
+           var input = sprintf('<input name="%s" value="coco" />', p.id);
+           zeform.append(input);
+
+        }
+        divform.append(zeform);
+        $("button#start").click(function(){
+          $.ajax({
+            type: "POST",
+            url: $("#startform").attr('action'),
+            data: $("#startform").serialize(),
+            success: function() {
+             $('#start-modal').modal('hide');
+          }
+         });
+        });
+   }});
+}
+
 function start(el) {
-   $.ajax({
+ createStartForm(el, $("#startform").empty())
+ $('#start-modal').modal('show');
+/*   $.ajax({
     url: '/monitor/activiti/process/' + el,
     type: 'POST',
     success: function(result) {
         window.location.href = "/monitor/activiti/process/" + el + "/instances";
    }});
+   */
 }
 function deleteProcess(el) {
    $.ajax({

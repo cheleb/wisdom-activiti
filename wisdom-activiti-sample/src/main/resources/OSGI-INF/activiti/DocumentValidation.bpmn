@@ -3,14 +3,24 @@
   <process id="activitiReview" name="Review And Approve Activiti Process" isExecutable="true">
     <startEvent id="startevent1" name="Start">
       <extensionElements>
-        <activiti:formProperty id="author" name="Author" type="string" variable="author" required="true"></activiti:formProperty>
+        <activiti:formProperty id="author" name="Author" type="string" variable="author" required="true">
+          <activiti:value id="one" name="Uno"></activiti:value>
+          <activiti:value id="two" name="dos"></activiti:value>
+        </activiti:formProperty>
       </extensionElements>
     </startEvent>
     <scriptTask id="scripttask1" name="Script Task" activiti:autoStoreVariables="false">
       <script>print("Started...")</script>
     </scriptTask>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="scripttask1"></sequenceFlow>
-    <userTask id="usertask1" name="User Task"></userTask>
+    <userTask id="usertask1" name="User Task">
+      <extensionElements>
+        <activiti:formProperty id="reason" name="Reason" type="string" variable="reason" default="none">
+          <activiti:value id="one" name="Un"></activiti:value>
+          <activiti:value id="two" name="deux"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
     <sequenceFlow id="flow2" sourceRef="scripttask1" targetRef="parallelgateway1"></sequenceFlow>
     <userTask id="usertask2" name="Manager Task"></userTask>
     <sequenceFlow id="flow3" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
