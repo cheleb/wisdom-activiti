@@ -8,10 +8,6 @@
     </encoder>
   </appender>
 
-  <logger name="org.activiti.osgi" level="INFO" />
-  <logger name="org.apache.felix.fileinstall" level="INFO" />
-  <logger name="org.apache.aries" level="INFO" />
-
   <root level="INFO">
     <appender-ref ref="STDOUT" />
   </root>
