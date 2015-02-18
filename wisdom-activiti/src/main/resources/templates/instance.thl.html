@@ -68,10 +68,10 @@
     <script language="JavaScript">
         function cancel(el, parent) {
             $.ajax({
-                url: '/activiti/instance/' + el,
+                url: '/monitor/activiti/instance/' + el,
                 type: 'DELETE',
                 success: function(result) {
-                    window.location.href = '/monitor/activiti/process/'+parent+'/instance/';
+                    window.location.href = '/monitor/activiti/process/'+parent+'/instances';
                 }});
         }
 
