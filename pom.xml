@@ -7,6 +7,12 @@
   <name>Wisdom Activiti extension</name>
   <description>Procide Activiti process engine and administrative UI.
   </description>
+
+  <properties>
+    <wisdom.version>0.9.1</wisdom.version>
+    <activiti.version>5.21.0</activiti.version>
+  </properties>
+
   <modules>
    <module>wisdom-activiti</module>
    <module>wisdom-activiti-engine</module>
